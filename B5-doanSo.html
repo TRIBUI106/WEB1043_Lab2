@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/style.css">
+
+    <style>
+        * {
+    box-sizing: border-box;
+    }
+
+    body {
+        transition: .3s;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        position: relative;
+        width: 700px;
+        height: 300px;
+        background-color: rgb(253, 250, 229);
+        border-radius: 10px;
+        text-align: center;
+        border: 0.5px solid black;
+        margin: auto;
+        margin-top: 5%;
+    }
+
+    .ketqua {
+        position: absolute;
+        bottom: 0px;
+        width: 700px;
+        height: 40px;
+        border-radius: 0px 0px 10px 10px;
+        background-color: black;
+    }
+
+    .daySo {
+        margin-top: 30px;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+    }
+
+    .bubble {
+        background-color: white;
+        width: 80px;
+        height: 80px;
+        margin: 0 20px;
+        border-radius: 50%;
+        border: 1px solid black;
+    }
+
+    .bubble span {
+        line-height: 80px;
+        font-size: 30px;
+    }
+
+    .ketqua {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .ketqua h4 {
+        clear: both;
+        margin-top: 7px;
+        color: white;
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Game Đoán Số</h1>
+        <input type="text" id="soNhapVao" placeholder="Nhập số">
+        <button onclick="tinhToan()">ĐOÁN</button>
+
+        <div class="daySo">
+            <div class="bubble"><span id="so1">?</span></div>
+            <div class="bubble"><span id="so2">?</span></div>
+            <div class="bubble"><span id="so3">?</span></div>
+            <div class="bubble"><span id="so4">?</span></div>
+            <div class="bubble"><span id="so5">?</span></div>
+        </div>
+
+        <div class="ketqua">
+            <h4>Kết quả : <span id="ketQua"></span></h4>
+            <h4>Số lượng giải trúng : <span id="soLuongGiaiTrung"></span></h4>
+        </div>
+
+
+    </div>
+    <script>
+    function tinhToan() {
+        let input = parseInt(document.getElementById("soNhapVao").value);
+        console.log(input);
+
+        let cacKetQua = [];
+
+        for ( i = 0; i < 5; i++) {
+            let soNgauNhien = (Math.random() * 5);
+            let singleNums = Math.round(soNgauNhien);
+            cacKetQua.push(singleNums);
+        }
+
+        console.log("Mảng Các Kết Quả : ")
+        console.log(cacKetQua);
+
+        var trungSo = false;
+        var soLuongGiaiTrung = 0
+
+        console.log("Các Kết Quả : ")
+
+        for ( i = 0; i < cacKetQua.length; i++ ) {
+            console.log(cacKetQua[i],input);
+
+            if ( cacKetQua[i] == input) {
+                trungSo = true;
+                soLuongGiaiTrung++;
+            };
+
+        };
+
+        document.getElementById("so1").innerHTML = cacKetQua[0];
+        document.getElementById("so2").innerHTML = cacKetQua[1];
+        document.getElementById("so3").innerHTML = cacKetQua[2];
+        document.getElementById("so4").innerHTML = cacKetQua[3];
+        document.getElementById("so5").innerHTML = cacKetQua[4];
+        document.getElementById("soLuongGiaiTrung").innerHTML = soLuongGiaiTrung;
+
+        if ( trungSo ) {
+            document.getElementById("ketQua").innerHTML = "Trúng Số !";
+        } else {
+            document.getElementById("ketQua").innerHTML = "Trúng Gió Chết Queo !";
+        }
+
+    }
+    </script>
+</body>
+</html>
